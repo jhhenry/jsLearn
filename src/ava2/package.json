@@ -1,0 +1,19 @@
+{
+  "name": "ava_try2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tryAva.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhhenry/jsLearn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhhenry/jsLearn/issues"
+  },
+  "homepage": "https://github.com/jhhenry/jsLearn#readme"
+}

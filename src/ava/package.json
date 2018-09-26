@@ -1,0 +1,15 @@
+{
+  "name": "ava_jh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^1.0.0-beta.8",
+    "source-map": "^0.7.3"
+  }
+}
