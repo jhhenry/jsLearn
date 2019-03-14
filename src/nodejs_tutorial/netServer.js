@@ -7,10 +7,13 @@ const server  = new net.Server((c) => {
       console.log('client disconnected');
     });
     c.on('data', data => {
-        console.log(`received data from client ${c}: ${data}`)
+        console.log(`received data from client ${c.localPort}: ${data}`)
+        if (data == "request contract address") {
+            console.log("received contract address request");
+            c.write("contract address: 0xabcd");
+            server.close();
+        }
     })
-    c.write('hello\r\n');
-    c.pipe(c);
     
   });
 server.on('error', (err) => {

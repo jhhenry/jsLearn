@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 
-const provider = new Web3.providers.WebsocketProvider("ws://192.168.56.123:8566", {headers: {
+const provider = new Web3.providers.WebsocketProvider("ws://kafka-server:8566", {headers: {
     Origin: "http://localhost"
 }});
 provider.on('error', e => console.error('WS Error', e));
@@ -9,42 +9,25 @@ provider.on('end', e => console.error('WS End', e));
 const web3 = new Web3(provider);
 const net = require('net');
 
-//console.log(web3);
-
-//web3.personal.unLockAccount
-//console.log(web3.eth.accounts);
 readContractAddress().then((r, err) => {
     if (err) {
         console.log("Got an error", err);
         return;
     }
     const addr = r;
-   // console.log("Finally got the addr", addr);
-    // construct the contract instance with the address
     try {
+        // construct the contract instance with the address
         const lotteryC = new web3.eth.Contract(addr.abi, addr.address);
         console.log("start monitoring RedeemedLottery events");
+        // start monitoring the specific event of the contract
+        // subscribe the event
         lotteryC.events.RedeemedLotttery().on(
             "data", e => {
                 console.log(e.returnValues);
         })
     } catch(e) {
         console.error(e);
-    }
-   
-   // console.log("lottery contract", lotteryC.methods.getPledge);
-    
-    //web3.eth.getAccounts().then(console.log)
-    //.then(arr => {
-        // console.log("getAccounts result:", arr);
-        // arr.forEach(e => {
-        //     lotteryC.methods.getPledge.call({from:e}).then(console.log);
-        // })
-        
-    // })
-    // start monitoring the specific event of the contract
-    // subscribe the event
-   
+    }  
 });
 
 function readContractAddress()
