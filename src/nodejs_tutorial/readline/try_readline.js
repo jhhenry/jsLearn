@@ -20,10 +20,21 @@ const prompt = rl.createInterface(
         terminal: true
     }
 );
-prompt.question('Please give the password: ', answer => {
-    if (answer) console.log(`you have input ${answer}\n`);
-    prompt.close();
-})
-mutableStdout.muted = true;
+new Promise((resolve, reject) => {
+    prompt.question('Please input the password for mysql: ', 
+        answer => {
+            if (answer) resolve(answer);
+            else reject("passowrd is required.")
+            prompt.close();
+        }
+    );
+    mutableStdout.muted = true;
+}
+).then(r => {
+    console.log(`get password: ${r}`);
+}).catch(err =>{
+    console.error(err);
+});
+
 
 
